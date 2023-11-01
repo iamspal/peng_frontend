@@ -20,7 +20,7 @@ export async function upVoteGif(id) {
     result = await result.json()
     return result.success
   } catch {
-    alert("Error up vote gif");
+    alert('Error up vote gif')
     return false
   }
 }

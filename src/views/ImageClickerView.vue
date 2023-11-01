@@ -6,10 +6,14 @@
     </div>
 
     <!-- Right section: Display details for the selected GIF -->
-    <div class="image-clicker__right" :class="{'show-as-modal': activeDetail?.title?.length}">
+    <div class="image-clicker__right" :class="{ 'show-as-modal': activeDetail?.title?.length }">
       <button @click="removeActiveDetail">X</button>
       <div class="image-clicker__right__item-detail">
-        <item-detail :item="activeDetail" @image-clicked="handleGifClick" v-if="activeDetail?.title"></item-detail>
+        <item-detail
+          :item="activeDetail"
+          @image-clicked="handleGifClick"
+          v-if="activeDetail?.title"
+        ></item-detail>
         <h1 v-else>Please select a Gif item</h1>
       </div>
     </div>
@@ -49,8 +53,8 @@ async function handleGifClick(gifImageId) {
   }
 }
 
-function removeActiveDetail(){
-  activeDetail.value = null;
+function removeActiveDetail() {
+  activeDetail.value = null
 }
 </script>
 
@@ -90,8 +94,8 @@ function removeActiveDetail(){
     button {
       display: none;
     }
-    
-    @media(max-width: 991px) {
+
+    @media (max-width: 991px) {
       height: 100%;
       position: fixed;
       top: 0;
@@ -123,7 +127,7 @@ function removeActiveDetail(){
       text-align: center;
       color: white;
 
-      @media(max-width: 991px) {
+      @media (max-width: 991px) {
         width: 100%;
       }
     }

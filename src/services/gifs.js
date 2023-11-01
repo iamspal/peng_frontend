@@ -4,7 +4,7 @@ export async function getGifs() {
     result = await result.json()
     return result.data
   } catch {
-    console.error('Error fetching gifs')
+    alert('Error fetching gifs')
     return []
   }
 }
@@ -20,7 +20,7 @@ export async function upVoteGif(id) {
     result = await result.json()
     return result.success
   } catch {
-    console.error('Error up vote gif')
+    alert("Error up vote gif");
     return false
   }
 }

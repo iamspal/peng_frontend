@@ -10,7 +10,7 @@
 export default {
   props: {
     items: Array,
-    required: true,
+    required: true
   },
   emits: ['item-clicked'],
   setup(props, ctx) {

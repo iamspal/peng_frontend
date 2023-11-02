@@ -8,6 +8,11 @@ const router = createRouter({
       path: '/',
       name: 'image-clicker',
       component: ImageClickerView
+    },
+    {
+      path: '/statics',
+      name: 'statics',
+      component: () => import('../views/CouponsStatics.vue')
     }
   ]
 })

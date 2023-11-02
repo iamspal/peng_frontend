@@ -37,15 +37,75 @@
         </div>
       </div>
     </div>
+
+    <hr />
+    <h2>How many coupons each coupon type has?</h2>
+    <canvas id="numberOfCoupons"></canvas>
+
+    <h2>
+      Number of coupons with discount, the minimum discount, maximum discount, and average discount
+      for percent-off coupons
+    </h2>
+    <canvas id="statsPercentOff"></canvas>
+
+    <h2>
+      Number of coupons with discount, the minimum discount, maximum discount, and average discount
+      for dollar-off coupons
+    </h2>
+    <canvas id="statsDollarOff"></canvas>
+
+    <h2>Same values, but grouping by retailer dollar-off</h2>
+    <canvas id="statsByRetailersDollarOff"></canvas>
+
+    <h2>Same values, but grouping by retailer percent-off</h2>
+    <canvas id="statsByRetailersPercentOff"></canvas>
   </div>
 </template>
 
 <script setup>
 import { coupons } from '../json/coupons'
 import { getDiscountStats, getEachCouponType, getRetailerStats } from '../services/coupons'
+import { onMounted } from 'vue'
+import {
+  getCouponsStatsByRetailerChartData,
+  getCouponStatsChartData,
+  getNumberOfCouponsChartData,
+  stackedBarChart
+} from '../services/charts'
+
 const couponTypes = getEachCouponType(coupons.coupons)
 const discountStats = getDiscountStats(couponTypes)
 const retailerStats = getRetailerStats(coupons.coupons)
+onMounted(() => {
+  // Number of coupons chart
+  stackedBarChart(getNumberOfCouponsChartData(couponTypes), 'numberOfCoupons')
+
+  // Percent off chart
+  const percentOffChartLabel =
+    'Number of coupons with discount, the minimum discount, maximum discount, and average discount for percent-off coupons'
+  stackedBarChart(
+    getCouponStatsChartData(discountStats['percent-off'], percentOffChartLabel),
+    'statsPercentOff'
+  )
+
+  // Dollar off chart
+  const dollarOffChartLabel =
+    'Number of coupons with discount, the minimum discount, maximum discount, and average discount for dollar-off coupons'
+  stackedBarChart(
+    getCouponStatsChartData(discountStats['dollar-off'], dollarOffChartLabel),
+    'statsDollarOff'
+  )
+
+  // Stats grouped by retailer
+  stackedBarChart(
+    getCouponsStatsByRetailerChartData(retailerStats, 'dollar-off'),
+    'statsByRetailersDollarOff'
+  )
+  stackedBarChart(
+    getCouponsStatsByRetailerChartData(retailerStats, 'percent-off'),
+    'statsByRetailersPercentOff'
+  )
+})
 </script>
 
 <style lang="scss" scoped>

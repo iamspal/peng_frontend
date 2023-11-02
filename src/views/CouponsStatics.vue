@@ -42,11 +42,7 @@
 
 <script setup>
 import { coupons } from '../json/coupons'
-import {
-  getDiscountStats,
-  getEachCouponType,
-  getRetailerStats
-} from '../services/coupons'
+import { getDiscountStats, getEachCouponType, getRetailerStats } from '../services/coupons'
 const couponTypes = getEachCouponType(coupons.coupons)
 const discountStats = getDiscountStats(couponTypes)
 const retailerStats = getRetailerStats(coupons.coupons)
